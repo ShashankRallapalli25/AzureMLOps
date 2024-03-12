@@ -5,6 +5,7 @@ import glob
 import os
 import numpy as np
 import pandas as pd
+import mlflow
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
@@ -41,8 +42,12 @@ def split_data(df)
     return X_train, X_test, y_train, y_test
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
-    # train model
-    LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
+    # Train model
+    with mlflow.start_run():
+        model = LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
+        mlflow.log_params({"reg_rate": reg_rate})
+        mlflow.log_metric("train_accuracy", model.score(X_train, y_train))
+        mlflow.log_metric("test_accuracy", model.score(X_test, y_test))
 
 
 def parse_args():
