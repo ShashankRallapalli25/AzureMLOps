@@ -9,7 +9,7 @@ inputs:
     type: uri_folder 
     path: experimentation/data/diabetes-dev.csv
     reg_rate: 0.01
-environment: zureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
 compute: azureml:rshashi571
 experiment_name: diabetes-data-example
 description: Train a classification model on diabetes data using a registered dataset as input.
