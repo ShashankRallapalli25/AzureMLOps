@@ -5,19 +5,11 @@ command: >-
   -- train.py
   -- diabetes-dev.csv ${{inputs.diabetes}}
 inputs:
-  diabetes:
-    path: azureml:diabetes-devdata:1
-    mode: ro_mount
-environment: azureml:basic-env-scikit@latest
-compute: azureml:aml-instance
-experiment_name: diabetes-data-example
-description: Train a classification model on diabetes data using a registered dataset as input.
-inputs:
   training_data: 
     type: uri_folder 
-    path: 
-  reg_rate: 0.01
-environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: 
-experiment_name: 
-description: 
+    path: experimentation/data/diabetes-dev.csv
+    reg_rate: 0.01
+environment: zureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+compute: azureml:rshashi571
+experiment_name: diabetes-data-example
+description: Train a classification model on diabetes data using a registered dataset as input.
